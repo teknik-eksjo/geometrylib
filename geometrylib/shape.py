@@ -19,36 +19,32 @@ class Triangle():
 
     def _rotations(self):
         """Return each of the three ways of rotating our sides."""
-        return ((self.a, self.b, self.c),
-                (self.b, self.c, self.a),
-                (self.c, self.a, self.b))
+        return False
 
     def __eq__(self, other):
         """Returns whether this triangle equals another triangle."""
-        sides = (self.a, self.b, self.c)
-        return any(sides == rotation for rotation in other._rotations())
+        return False
 
     def is_similar(self, triangle):
         """Return whether this triangle is similar to another triangle."""
-        return any(self.a / a == self.b / b == self.c / c for a, b, c in triangle._rotations())
+        return False
 
     def is_equilateral(self):
         """Return whether this triangle is equilateral."""
-        return self.a == self.b == self.c
+        return False
 
     def is_isosceles(self):
         """Return wheter this triangle is isosceles."""
-        return any(a == b for a, b, c in self._rotations())
+        return False
 
     def perimeter(self):
         """Return the perimiter of the triangle."""
-        return self.a + self.b + self.c
+        return False
 
     def area(self):
         """Return the area of this triangle."""
-        s = (self.a + self.b + self.c)/2
-        return sqrt(s * (s - self.a) * (s - self.b) * (s - self.c))
+        return 0.0
 
     def scale(self, factor):
         """Return a new triangle, `factor` times the size of this one."""
-        return Triangle(self.a * factor, self.b * factor, self.c * factor)
+        return self

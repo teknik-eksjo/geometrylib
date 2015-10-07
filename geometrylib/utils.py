@@ -10,43 +10,30 @@ def _make_triangle(a, b, c):
 
 def is_triangle(a, b, c):
     """Test whether lengths `a`, `b` and `c` can be the sides of a triangle."""
-    triangle = _make_triangle(a, b, c)
-    return not triangle is None
+    return False
 
 def is_equilateral(a, b, c):
     """Return whether lengths `a`, `b` and `c` are an equilateral triangle."""
-    triangle = _make_triangle(a, b, c)
-    if triangle is None:
-        return False
-    return triangle.is_equilateral()
+    return False
 
 def is_isosceles(a, b, c):
     """Return whether lengths `a`, `b` and `c` are an isosceles triangle."""
-    triangle = _make_triangle(a, b, c)
-    if triangle is None:
-        return False
-    return triangle.is_isosceles()
+    return False
 
 def compute_perimiter(a, b, c):
     """Return the perimeter of the triangle with side lengths `a`, `b` and `c`.
 
     If the three lengths provided cannot form a triangle,
-    then the perimeter 0 is returned.
+    then the perimeter 0.0 is returned.
 
     """
-    triangle = _make_triangle(a, b, c)
-    if triangle is None:
-        return 0
-    return triangle.perimeter()
+    return 0.0
 
 def compute_area(a, b, c):
     """Return the area of the triangle with side lengths `a`, `b` and `c`.
 
     If the three lengths provided cannot form a triangle,
-    then the area 0 is returned.
+    then the area 0.0 is returned.
 
     """
-    triangle = _make_triangle(a, b, c)
-    if triangle is None:
-        return 0
-    return triangle.area()
+    return 0.0

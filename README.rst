@@ -12,7 +12,7 @@ Skapa den virtuella körmiljön med de paket som behövs.
 
 .. code-block::
 
-  pyvenv install -r requirements.txt venv
+  pyvenv venv
 
 Aktivera den virtella körmiljön:
 
@@ -26,7 +26,11 @@ Om du använder Windows:
 
   venv/Script/activate.bat
 
-För att köra enhetstesterna kan
+Installera de paket som behövs för uppgiften:
+
+.. code-block::
+
+  pip install -r requirements.txt
 
 Uppgiften
 ---------
@@ -41,7 +45,37 @@ Uppgiften
     det kan betyda att du måste återvända och ändra eller komplettera dina
     tester.
 
+    För att köra enhetstesterna med coverage.py kan du använda följande kommando
 
+    .. code-block::
+
+      python manage.py test --coverage
+
+3.  Generera dokumentation med Sphinx. Använd :code:`sphinx-quickstart` för att
+    snabbt komma igång. Dokumentationen ska bestå av tre delar;
+
+    :code:`api.rst`
+      Använd autodoc för att dokumentera geometrylib.
+    :code:`tutorial.rst`
+      Utgå från texten i filen :code:`tutorial.txt` och lägg till den markup
+      som saknas.
+    :code:`guide.rst`.
+      Utgå från texten i filen :code:`guide.txt` och lägg till den markup som
+      saknas.
+
+    För att bygga html-versionen av dokumentationen kör du följande i mappen
+    :code:`docs`.
+
+    .. code-block::
+
+      make html
+
+    För att testa att de kodexempel som finns i dokumentationen fungerar kan
+    du köra :code:`make doctest`. Ibland trilskas referenser och index och då
+    kan man behöva köra :code:`make clean` innan :code:`make html`.
+
+    Kom ihåg att bara filer som refereras från :code:`ìndex.rst` genereras
+    när du kör :code:`make html`.
 
 .. _unittest: https://docs.python.org/3.5/library/unittest.html
 .. _coverage.py: https://coverage.readthedocs.org/en/latest/
