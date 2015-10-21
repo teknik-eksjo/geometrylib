@@ -7,6 +7,6 @@ install:
   - pip install pylint
 script:
   - pylint geometrylib
-  - coverage run ./manage.py test
+  - coverage run --include geometrylib/* ./manage.py test
   - coverage report --fail-under 100
   - sphinx-build -nW -b html -d docs/build/doctrees . docs/build/html

@@ -11,16 +11,19 @@ def cli():
 @click.option('--no-html', is_flag=True)
 def test(with_coverage, no_html):
     if with_coverage:
+        # Initialize coverage.py.
         import coverage
         COV = coverage.coverage(branch=True, include='geometrylib/*')
         COV.start()
 
+    # Run all unit tests found in tests folder.
     click.echo('Running autodiscovered tests\n{}'.format('=' * 70))
     import unittest
     tests = unittest.TestLoader().discover('tests')
     results = unittest.TextTestRunner(verbosity = 2).run(tests)
 
     if with_coverage:
+        # Sum up the results of the code coverage analysis.
         COV.stop()
         COV.save()
         click.echo('\nCoverage Summary\n{}'.format('=' * 70))
@@ -33,9 +36,16 @@ def test(with_coverage, no_html):
         COV.erase()
 
     if not results.wasSuccessful():
+        # Make sure to get a non-zero exit code when failing.
         raise click.ClickException('Test suite failed.')
 
+@click.command()
+def lint():
+    from pylint import epylint as lint
+    lint.py_run()
+
 cli.add_command(test)
+cli.add_command(lint)
 
 if __name__ == "__main__":
     cli()
