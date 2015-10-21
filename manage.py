@@ -8,7 +8,8 @@ def cli():
 
 @click.command()
 @click.option('--coverage', 'with_coverage', is_flag=True)
-def test(with_coverage):
+@click.option('--no-html', is_flag=True)
+def test(with_coverage, no_html):
     if with_coverage:
         import coverage
         COV = coverage.coverage(branch=True, include='geometrylib/*')
@@ -24,10 +25,11 @@ def test(with_coverage):
         COV.save()
         click.echo('\nCoverage Summary\n{}'.format('=' * 70))
         COV.report()
-        basedir = os.path.abspath(os.path.dirname(__file__))
-        covdir = os.path.join(basedir, 'tmp/coverage')
-        COV.html_report(directory=covdir)
-#        click.echo('HTML version: file://{}/index.html'.format(covdir))
+        if not no_html:
+            basedir = os.path.abspath(os.path.dirname(__file__))
+            covdir = os.path.join(basedir, 'tmp/coverage')
+            COV.html_report(directory=covdir)
+            click.echo('HTML version: file://{}/index.html'.format(covdir))
         COV.erase()
 
 cli.add_command(test)
