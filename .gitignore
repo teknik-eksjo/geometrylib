@@ -33,6 +33,7 @@ venv
 
 # Temporary project files
 tmp/
+.coverage
 
 # Sphinx built documentation
 docs/build/*

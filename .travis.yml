@@ -1,8 +1,10 @@
 language: python
 python: "3.5"
-install: pip install -r requirements.txt
+install:
+  - pip install -r requirements.txt
+  - pip install pylint
 script:
-  - pylint
-  - coverage run python -m unittest -s ./tests
+  - pylint geometrylib
+  - coverage run ./manage.py test
   - coverage report --fail-under 100
-  - sphinx-build -nW -b html -d _build/doctrees . _build/html
+  - sphinx-build -nW -b html -d docs/build/doctrees . docs/build/html

@@ -18,7 +18,7 @@ def test(with_coverage, no_html):
     click.echo('Running autodiscovered tests\n{}'.format('=' * 70))
     import unittest
     tests = unittest.TestLoader().discover('tests')
-    unittest.TextTestRunner(verbosity = 2).run(tests)
+    results = unittest.TextTestRunner(verbosity = 2).run(tests)
 
     if with_coverage:
         COV.stop()
@@ -31,6 +31,9 @@ def test(with_coverage, no_html):
             COV.html_report(directory=covdir)
             click.echo('HTML version: file://{}/index.html'.format(covdir))
         COV.erase()
+
+    if not results.wasSuccessful():
+        raise click.ClickException('Test suite failed.')
 
 cli.add_command(test)
 
