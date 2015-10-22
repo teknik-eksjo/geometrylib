@@ -5,7 +5,7 @@ python:
 install:
   - pip install -r requirements.txt
 script:
-  - pylint geometrylib
+  - ./manage.py lint
   - coverage run --include geometrylib/* ./manage.py test
   - coverage report --fail-under 100
   - sphinx-build -nW -b html -d docs/build/doctrees . docs/build/html
