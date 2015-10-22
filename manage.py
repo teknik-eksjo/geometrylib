@@ -9,7 +9,8 @@ def cli():
 @click.command()
 @click.option('--coverage', 'with_coverage', is_flag=True)
 @click.option('--no-html', is_flag=True)
-def test(with_coverage, no_html):
+@click.option('--save', is_flag=True)
+def test(with_coverage, no_html, save):
     if with_coverage:
         # Initialize coverage.py.
         import coverage
@@ -31,13 +32,14 @@ def test(with_coverage, no_html):
         if not no_html:
             basedir = os.path.abspath(os.path.dirname(__file__))
             covdir = os.path.join(basedir, 'tmp/coverage')
-            COV.html_report(directory=covdir)
+            COV.html_report(directory = covdir)
             click.echo('HTML version: file://{}/index.html'.format(covdir))
-        COV.erase()
+        if not save:
+            COV.erase()
 
-    if not results.wasSuccessful():
-        # Make sure to get a non-zero exit code when failing.
-        raise click.ClickException('Test suite failed.')
+#    if not results.wasSuccessful():
+#        # Make sure to get a non-zero exit code when failing.
+#        raise click.ClickException('Test suite failed.')
 
 
 @click.command()
