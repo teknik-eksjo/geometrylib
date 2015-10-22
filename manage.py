@@ -42,7 +42,7 @@ def test(with_coverage, no_html):
 @click.command()
 def lint():
     from pylint import epylint as lint
-    lint.py_run()
+    lint.py_run('geometrylib/')
 
 cli.add_command(test)
 cli.add_command(lint)
