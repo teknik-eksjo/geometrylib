@@ -37,9 +37,9 @@ def test(with_coverage, no_html, no_report):
             COV.report()
             COV.erase()
 
-#    if not results.wasSuccessful():
-#        # Make sure to get a non-zero exit code when failing.
-#        raise click.ClickException('Test suite failed.')
+    if not results.wasSuccessful():
+        # Make sure to get a non-zero exit code when failing.
+        raise click.ClickException('Test suite failed.')
 
 
 @click.command()
