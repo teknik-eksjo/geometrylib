@@ -6,6 +6,6 @@ install:
   - pip install -r requirements.txt
 script:
   - ./manage.py lint
-  - ./manage.py test --coverage --save
+  - ./manage.py test --coverage --no-html --no-report
   - coverage report --fail-under 100
   - sphinx-build -nW -b html -d docs/build/doctrees . docs/build/html

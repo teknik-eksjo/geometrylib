@@ -9,8 +9,8 @@ def cli():
 @click.command()
 @click.option('--coverage', 'with_coverage', is_flag=True)
 @click.option('--no-html', is_flag=True)
-@click.option('--save', is_flag=True)
-def test(with_coverage, no_html, save):
+@click.option('--no-report', is_flag=True)
+def test(with_coverage, no_html, no_report):
     if with_coverage:
         # Initialize coverage.py.
         import coverage
@@ -27,14 +27,14 @@ def test(with_coverage, no_html, save):
         # Sum up the results of the code coverage analysis.
         COV.stop()
         COV.save()
-        click.echo('\nCoverage Summary\n{}'.format('=' * 70))
-        COV.report()
         if not no_html:
             basedir = os.path.abspath(os.path.dirname(__file__))
             covdir = os.path.join(basedir, 'tmp/coverage')
             COV.html_report(directory = covdir)
             click.echo('HTML version: file://{}/index.html'.format(covdir))
-        if not save:
+        if not no_report:
+            click.echo('\nCoverage Summary\n{}'.format('=' * 70))
+            COV.report()
             COV.erase()
 
 #    if not results.wasSuccessful():
