@@ -2,6 +2,7 @@
 
 from geometrylib.shape import Triangle
 
+
 def _make_triangle(a, b, c):
     try:
         return Triangle(a, b, c)

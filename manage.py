@@ -39,10 +39,15 @@ def test(with_coverage, no_html):
         # Make sure to get a non-zero exit code when failing.
         raise click.ClickException('Test suite failed.')
 
+
 @click.command()
 def lint():
-    from pylint import epylint as lint
-    lint.py_run('geometrylib/')
+    from flake8 import main as flake8
+    import sys
+
+    sys.argv = ['flake8', 'geometrylib']
+    flake8.main()
+
 
 cli.add_command(test)
 cli.add_command(lint)
