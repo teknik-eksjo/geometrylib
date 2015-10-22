@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import os
 import click
 
 @click.group()
@@ -27,12 +26,16 @@ def test(with_coverage, no_html, no_report):
         # Sum up the results of the code coverage analysis.
         COV.stop()
         COV.save()
+
         if not no_html:
+            # Generate HTML report and move to tmp directory.
+            import os
             basedir = os.path.abspath(os.path.dirname(__file__))
             covdir = os.path.join(basedir, 'tmp/coverage')
             COV.html_report(directory = covdir)
-            click.echo('HTML version: file://{}/index.html'.format(covdir))
+
         if not no_report:
+            # Show the report and clean up.
             click.echo('\nCoverage Summary\n{}'.format('=' * 70))
             COV.report()
             COV.erase()
