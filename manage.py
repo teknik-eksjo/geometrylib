@@ -41,8 +41,11 @@ def test(with_coverage, no_html):
 
 @click.command()
 def lint():
-    from pylint import epylint as lint
-    lint.py_run('geometrylib/')
+    import flake8.main as flake
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    flakedir = os.path.join(basedir, 'geometrylib')
+    click.echo('Running Linter\n{}'.format('=' * 70))
+    flake.check_file(flakedir)
 
 cli.add_command(test)
 cli.add_command(lint)
